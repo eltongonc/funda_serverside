@@ -1,0 +1,93 @@
+<section id="stap1">
+            <h3>Stap 1. Ik ben op zoek naar een</h3>
+            <figure>
+                <img src="/img/eengezins-rechts.svg" alt="">
+            </figure>
+            <form class="search">
+                <fieldset>
+                    <input id="koop" type="radio" name="type" value="koop" checked>
+                    <label for="koop">
+                        <figure>
+                        <img src="/img/eengezins-rechts.svg" alt="">
+                    </figure>
+                    Koop woning</label>
+
+                    <input id="huur" type="radio" name="type" value="huur">
+                    <label for="huur">
+                        <figure>
+                            <img src="/img/huur.svg" alt="">
+                        </figure>
+                        Huur woning</label>
+                </fieldset>
+                <p>in</p>
+                <fieldset>
+
+                    <input id="search" type="text" name="search" placeholder="Locatie" required>
+
+                    <button type="submit">Volgende stap</button>
+                </fieldset>
+            </form>
+        </section>
+        <!-- Page 2 -->
+        <section id="stap2">
+                <h3>Stap 2. Mijn huis heeft in ieder geval</h3>
+                <figure>
+                    <img src="/img/eengezins-rechts.svg" alt="">
+                </figure>
+                <form class="search">
+                    <fieldset>
+                        <input id="1-kamer" type="checkbox" name="kamers" value="1" checked>
+                        <label for="1-kamer">1 Kamer</label>
+
+                        <input id="2-kamer" type="checkbox" name="kamers" value="2">
+                        <label for="2-kamer">2 Kamers</label>
+
+                        <input id="3-kamer" type="checkbox" name="kamers" value="3">
+                        <label for="3-kamer">3 Kamers</label>
+
+
+                        <input id="4-kamer" type="checkbox" name="kamers" value="4">
+                        <label for="4-kamer">4 Kamers</label>
+
+
+                        <input id="5-kamer" type="checkbox" name="kamers" value="5">
+                        <label for="5-kamer">5 Kamers</label>
+
+                    </fieldset>
+                    <small>max 2 opties, bijv: tussen 3 en 5 kamers</small>
+                    <fieldset>
+                        <button type="submit">Volgende stap</button>
+                    </fieldset>
+                </form>
+            </section>
+        </section>
+        <!-- Page 3 -->
+        <section id="stap3">
+            <section>
+                <h3>Stap 3. Mijn huis bevat in ieder geval</h3>
+                <small>Sleep vanuit extra's naar het huisje</small>
+                <section class="drop-zone">
+                    <figure>
+                        <img src="/img/eengezins-rechts.svg" alt="">
+                    </figure>
+                </section>
+
+                <aside>
+                    <section class="drop-zone">
+                        <h3>Buitenruimte</h3>
+                        <p id="Balkon" draggable="true">Balkon</p>
+                        <p id="Dakterras" draggable="true">Dakterras</p>
+                        <p id="Tuin" draggable="true">Tuin</p>
+                    </section>
+                </aside>
+
+                <a href="#stap4" role="button">Volgende stap</a>
+            </section>
+        </section>
+        <!-- Page 4 -->
+        <section id="stap4">
+            <h3>Stap 4. Gebaseerd op uw voorkeuren hebben zijn de volgende huizen gevonden</h3>
+            <div id="googleMap"></div>
+        </section>
+        <!-- Page 5 -->
+        <section id="huis_detail"></section>

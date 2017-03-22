@@ -4,31 +4,29 @@ var router = express.Router();
 var key = process.env.KEY;
 var request = require("request");
 
-
-/* GET home page. */
+/****
+** Get
+****/
 router.get('/', function(req, res) {
-    var url = `http://partnerapi.funda.nl/feeds/Aanbod.svc/json/${key}/?type=koop&zo=/heel-nederland/&page=1&pagesize=25`;
+    res.render('wizzard', { title: "Funda" });
+});
+/****
+** Posts
+****/
+router.post('/', function(req, res) {
+    var url = generateURL(req.body);
+    console.log(req.body);
 
     request(url, function (error, response, data) {
+        console.log(JSON.parse(data));
       res.render('index', { title: "Funda", data:JSON.parse(data) });
     });
 });
 
 
 /****
-** Posts
+** Helpers
 ****/
-router.post('/', function(req, res) {
-    console.log(req.body);
-    // var url = generateURL(req.body);
-    res.send(req.body)
-    // request(url, function (error, response, data) {
-    //     console.log(JSON.parse(data));
-    //   res.render('index', { title: "Funda", data:JSON.parse(data) });
-    // });
-});
-
-
 function generateURL(options){
     var url = {
         base: "http://partnerapi.funda.nl/feeds/Aanbod.svc/json/",
@@ -65,5 +63,6 @@ function createRange(array, name){
         return `${array[0]}-${array[array.length - 1 ]}-${name}s`;
     }
 }
+
 
 module.exports = router;

@@ -1,0 +1,30 @@
+<section>
+
+    <h3>{{TotaalAantalObjecten}} Resultaten</h3>
+    {{#each data.Objects}}
+    <article>
+        <img src="{{FotoMedium}}" alt="{{Adres}}" />
+        <h1>
+            <a id="{{Id}}" href="/house/{{Id}}">{{Adres}}</a>
+            <small>{{Postcode}} {{Woonplaats}}</small>
+        </h1>
+        <p><strong>{{{PrijsGeformatteerdHtml}}}</strong></p>
+
+        <footer>
+            <p>{{Woonoppervlakte}}m<span class="sup">2</span> / {{Perceeloppervlakte}}m<span class="sup">2</span>
+            <p class="kamers">{{AantalKamers}} Kamers</span></p>
+        </footer>
+    </article>
+    {{/each}}
+</section>
+<nav>
+    <ul>
+        <li>Aantal pagina's: {{data.Paging.AantalPaginas}}</li>
+        {{#if data.Paging.VolgendeUrl }}
+        <li><a href="{{data.Paging.VolgendeUrl}}" id="{{data.Paging.VolgendeUrl}}">Volgende</a></li>
+        {{/if}}
+        {{#if data.Paging.VorigeUrl }}
+        <li><a href="{{data.Paging.VorigeUrl}}" id="{{data.Paging.VorigeUrl}}">Vorige</a></li>
+        {{/if}}
+    </ul>
+</nav>

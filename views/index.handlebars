@@ -1,43 +1,5 @@
-<form class="search" action="/" method="post">
-    <input type="text" id="search" name="search">
-    <label for="search">Plaats, buurt, adres etc.</label>
-
-    <label>
-        <input type="radio" name="type" value="koop">
-        Koop
-    </label>
-    <label>
-        <input type="radio" name="type" value="huur">
-        Huur
-    </label>
-    <button type="submit">Search</button>
-</form>
-
-<section>
-
-    <h3>{{TotaalAantalObjecten}} Resultaten</h3>
-    {{#each data.Objects}}
-    <article>
-        <img src="{{FotoLarge}}" alt="{{Adres}}" />
-        <h1>
-            <a id="{{Id}}" href="{{Id}}">{{Adres}}</a>
-            <small>{{Postcode}} {{Woonplaats}}</small>
-        </h1>
-        <p><strong>{{{PrijsGeformatteerdHtml}}}</strong></p>
-
-        <footer>
-            <p>{{Woonoppervlakte}}m<span class="sup">2</span> / {{Perceeloppervlakte}}m<span class="sup">2</span>
-            <p class="kamers">{{AantalKamers}} Kamers</span></p>
-        </footer>
-    </article>
-    {{/each}}
+<section style="height: 50vh;background-image: url(assets.fstatic.nl/master_838/assets/components/search-banner/images/ohd-herenhuis-silhouet.svg)">test
 </section>
-    <ul>
-        <li>Aantal pagina's: {{Paging.AantalPaginas}}</li>
-        {{#if Paging.VolgendeUrl }}
-        <li><a id="{{Paging.VolgendeUrl}}">Volgende</a></li>
-        {{/if}}
-        {{#if Paging.VorigeUrl }}
-        <li><a id="{{Paging.VorigeUrl}}">Vorige</a></li>
-        {{/if}}
-    </ul>
+{{> search}}
+
+{{> footer}}
