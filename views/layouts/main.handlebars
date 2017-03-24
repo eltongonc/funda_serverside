@@ -8,12 +8,13 @@
     <!-- critical css -->
     {{> loadcss}}
     {{> criticalcss}}
-    <script> loadCSS('/css/style.css'); </script>
+    <script> loadCSS('/css/style.min.css'); </script>
     <noscript>
-        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/css/style.min.css">
     </noscript>
 
-    <script src="/js/script.min.js" defer></script>
+    <!-- <script src="/js/script.min.js" defer></script> -->
+    {{> javascript}}
 </head>
 <body>
     {{> header}}

@@ -10,11 +10,10 @@ var bodyParser = require('body-parser');
 var template  = require('express-handlebars');
 var routes = require("./routes/paths.js");
 var compression = require('compression');
+var async = require('async');
 
 
 var app = express();
-
-
 
 
 // view engine setup
@@ -25,7 +24,7 @@ app.engine('handlebars', template({
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'handlebars');
 
-// Faster middlewares src: https://engineering.gosquared.com/making-dashboard-faster
+// Faster middlewares src:https://engineering.gosquared.com/making-dashboard-faster
 function parallel(middlewares) {
   return function (req, res, next) {
     async.each(middlewares, function (mw, cb) {
@@ -34,28 +33,25 @@ function parallel(middlewares) {
   };
 }
 
-// app.use(parallel([
-//   getUser,
-//   getSiteList,
-//   getCurrentSite,
-//   getSubscription
-// ]));
-
-// compression
 app.use(compression({
     threshhold: 0,
     filter: function (){
         return true;
     }
 }));
+
+app.use(parallel([
+    logger('dev'),
+    bodyParser.json(),
+    bodyParser.urlencoded({
+        extended: true
+    }),
+    cookieParser(),
+    express.static(path.join(__dirname, 'public'), {  lastModified: false, maxAge: '1y' })
+]));
+
+
 // app.use(favicon(__dirname + '/public/img/favicon.ico'));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public'), {  lastModified: false, maxAge: '1y' }));
 
 // Create all routes
 for (var x in routes) {
