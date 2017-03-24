@@ -5,5 +5,5 @@ var wizzard = require('./wizzard');
 module.exports = {
     "/": index,
     "/house/": house,
-    "/wizzard/": wizzard
+    // "/wizzard/": wizzard
 };
