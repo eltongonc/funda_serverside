@@ -19,26 +19,26 @@ router.get('/', function(req, res) {
 ** Posts
 ****/
 router.post('/', function(req, res) {
-    console.log(req.body);
-    // var url = generateURL(req.body);
-    res.send(req.body)
-    // request(url, function (error, response, data) {
-    //     console.log(JSON.parse(data));
-    //   res.render('index', { title: "Funda", data:JSON.parse(data) });
-    // });
+    var url = generateURL(req.body);
+    // res.send(url)
+    request(url, function (error, response, data) {
+      res.render('index', { title: "Funda", data:JSON.parse(data) });
+    });
 });
-
+// "koop/amsterdam/+1km/50000-75000/"
 
 function generateURL(options){
     var url = {
         base: "http://partnerapi.funda.nl/feeds/Aanbod.svc/json/",
         key: key +"/",
         type: options.type || "koop",
-        query: "&zo=/" + options.search.toLowerCase() + "/" || "&zo=/heel-nederland/",
-        kamers: createRange(options.kamers, "kamer") + "/",
-        options: arrayToString(options.opties)
+        query: options.query !== "" ? "&zo=/" + options.query.toLowerCase() + "/" : "&zo=/heel-nederland/",
+        radius: options.radius !== '0' ? "+"+options.radius + "km/" : "",
+        kamers: options.kamers ? createRange(options.kamers, "kamer") + "/" : "",
+        options: options.opties ? arrayToString(options.opties) : "",
+        prijs_range: options.prijs_van + "-" + options.prijs_tot
     };
-    return `${url.base}${url.key}?type=${url.type}${url.query}${url.kamers}${url.options}&page=1&pagesize=25`
+    return `${url.base}${url.key}?type=${url.type}${url.query}${url.radius}${url.prijs_range}${url.kamers}${url.options}&page=1&pagesize=25`
 }
 
 function arrayToString(array){

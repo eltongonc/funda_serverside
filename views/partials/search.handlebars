@@ -1,106 +1,101 @@
-        <form class="home" action="/" method="post">
-        <section class="header">
-            <input id="koop" type="radio" name="type" value="koop" checked>
-            <label for="koop">Koop woning</label>
+<form class="home" action="/" method="post">
+    <section class="header">
+        <input id="koop" type="radio" name="type" value="koop" checked>
+        <label for="koop">Koop</label>
 
-            <input id="huur" type="radio" name="type" value="huur">
-            <label for="huur">Huur woning</label>
-        </section>
-
-        <section class="body">
-
-            <fieldset>
-                <input type="text" name="filter_location" id="autocomplete-input" placeholder="Plaats, buurt, adres etc.">
-
-                <select name="filter_Afstand" id="Afstand" autocomplete="off">
-                    <option selected="" value="0">+ 0 km</option>
-                    <option value="1">+ 1 km</option>
-                    <option value="2">+ 2 km</option>
-                    <option value="5">+ 5 km</option>
-                    <option value="10">+ 10 km</option>
-                    <option value="15">+ 15 km</option>
-                </select>
-            </fieldset>
-            <label for="Afstand">Straal</label>
-
-            <fieldset >
-                <legend class="range-filter__legend">Prijs</legend>
-
-                <label for="range-van" >Van</label>
-                <select id="range-van" name="range-van">
-                    <option value="other">Anders</option>
-                    <option selected="" value="0">€ 0</option>
-                    <option value="50000">€ 50.000</option>
-                    <option value="75000">€ 75.000</option>
-                    <option value="100000">€ 100.000</option>
-                    <option value="125000">€ 125.000</option>
-                    <option value="150000">€ 150.000</option>
-                    <option value="175000">€ 175.000</option>
-                    <option value="200000">€ 200.000</option>
-                    <option value="225000">€ 225.000</option>
-                    <option value="250000">€ 250.000</option>
-                    <option value="275000">€ 275.000</option>
-                    <option value="300000">€ 300.000</option>
-                    <option value="325000">€ 325.000</option>
-                    <option value="350000">€ 350.000</option>
-                    <option value="375000">€ 375.000</option>
-                    <option value="400000">€ 400.000</option>
-                    <option value="450000">€ 450.000</option>
-                    <option value="500000">€ 500.000</option>
-                    <option value="550000">€ 550.000</option>
-                    <option value="600000">€ 600.000</option>
-                    <option value="650000">€ 650.000</option>
-                    <option value="700000">€ 700.000</option>
-                    <option value="750000">€ 750.000</option>
-                    <option value="800000">€ 800.000</option>
-                    <option value="900000">€ 900.000</option>
-                    <option value="1000000">€ 1.000.000</option>
-                    <option value="1250000">€ 1.250.000</option>
-                    <option value="1500000">€ 1.500.000</option>
-                    <option value="2000000">€ 2.000.000</option>
-                </select>
-
-                <label for="range-tot">Tot</label>
-                <select id="range-tot" autocomplete="off">
-                    <option value="other">Anders</option>
-                    <option value="50000">€ 50.000</option>
-                    <option value="75000">€ 75.000</option>
-                    <option value="100000">€ 100.000</option>
-                    <option value="125000">€ 125.000</option>
-                    <option value="150000">€ 150.000</option>
-                    <option value="175000">€ 175.000</option>
-                    <option value="200000">€ 200.000</option>
-                    <option value="225000">€ 225.000</option>
-                    <option value="250000">€ 250.000</option>
-                    <option value="275000">€ 275.000</option>
-                    <option value="300000">€ 300.000</option>
-                    <option value="325000">€ 325.000</option>
-                    <option value="350000">€ 350.000</option>
-                    <option value="375000">€ 375.000</option>
-                    <option value="400000">€ 400.000</option>
-                    <option value="450000">€ 450.000</option>
-                    <option value="500000">€ 500.000</option>
-                    <option value="550000">€ 550.000</option>
-                    <option value="600000">€ 600.000</option>
-                    <option value="650000">€ 650.000</option>
-                    <option value="700000">€ 700.000</option>
-                    <option value="750000">€ 750.000</option>
-                    <option value="800000">€ 800.000</option>
-                    <option value="900000">€ 900.000</option>
-                    <option value="1000000">€ 1.000.000</option>
-                    <option value="1250000">€ 1.250.000</option>
-                    <option value="1500000">€ 1.500.000</option>
-                    <option value="2000000">€ 2.000.000</option>
-                    <option selected="" value="ignore_filter">Geen maximum</option>
-                </select>
-            </fieldset>
-
-            <input type="submit" value="Zoek"/>
-        </div>
+        <input id="huur" type="radio" name="type" value="huur">
+        <label for="huur">Huur</label>
     </section>
+    <section class="location">
+        <input type="text" name="query" id="autocomplete-input" placeholder="Plaats, buurt, adres etc.">
 
-    <footer class="search-block__links-bar">
+        <div class="select">
+            <select name="radius" id="Afstand" autocomplete="off">
+                <option selected="" value="0">+ 0 km</option>
+                <option value="1">+ 1 km</option>
+                <option value="2">+ 2 km</option>
+                <option value="5">+ 5 km</option>
+                <option value="10">+ 10 km</option>
+                <option value="15">+ 15 km</option>
+            </select>
+            <!-- <label for="Afstand">Straal</label> -->
+        </div>
 
-    </footer>
+            <div class="select">
+                <label for="range_van" >Van
+                    <select id="range_van" name="prijs_van">
+                        <!-- <option value="other">Anders</option> -->
+                        <option selected="" value="0">€ 0</option>
+                        <option value="50000">€ 50.000</option>
+                        <option value="75000">€ 75.000</option>
+                        <option value="100000">€ 100.000</option>
+                        <option value="125000">€ 125.000</option>
+                        <option value="150000">€ 150.000</option>
+                        <option value="175000">€ 175.000</option>
+                        <option value="200000">€ 200.000</option>
+                        <option value="225000">€ 225.000</option>
+                        <option value="250000">€ 250.000</option>
+                        <option value="275000">€ 275.000</option>
+                        <option value="300000">€ 300.000</option>
+                        <option value="325000">€ 325.000</option>
+                        <option value="350000">€ 350.000</option>
+                        <option value="375000">€ 375.000</option>
+                        <option value="400000">€ 400.000</option>
+                        <option value="450000">€ 450.000</option>
+                        <option value="500000">€ 500.000</option>
+                        <option value="550000">€ 550.000</option>
+                        <option value="600000">€ 600.000</option>
+                        <option value="650000">€ 650.000</option>
+                        <option value="700000">€ 700.000</option>
+                        <option value="750000">€ 750.000</option>
+                        <option value="800000">€ 800.000</option>
+                        <option value="900000">€ 900.000</option>
+                        <option value="1000000">€ 1.000.000</option>
+                        <option value="1250000">€ 1.250.000</option>
+                        <option value="1500000">€ 1.500.000</option>
+                        <option value="2000000">€ 2.000.000</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="select">
+                <label for="range_tot">Tot
+                    <select id="range_tot" name="prijs_tot" autocomplete="off">
+                        <!-- <option value="other">Anders</option> -->
+                        <option value="50000">€ 50.000</option>
+                        <option value="75000">€ 75.000</option>
+                        <option value="100000">€ 100.000</option>
+                        <option value="125000">€ 125.000</option>
+                        <option value="150000">€ 150.000</option>
+                        <option value="175000">€ 175.000</option>
+                        <option value="200000">€ 200.000</option>
+                        <option value="225000">€ 225.000</option>
+                        <option value="250000">€ 250.000</option>
+                        <option value="275000">€ 275.000</option>
+                        <option value="300000">€ 300.000</option>
+                        <option value="325000">€ 325.000</option>
+                        <option value="350000">€ 350.000</option>
+                        <option value="375000">€ 375.000</option>
+                        <option value="400000">€ 400.000</option>
+                        <option value="450000">€ 450.000</option>
+                        <option value="500000">€ 500.000</option>
+                        <option value="550000">€ 550.000</option>
+                        <option value="600000">€ 600.000</option>
+                        <option value="650000">€ 650.000</option>
+                        <option value="700000">€ 700.000</option>
+                        <option value="750000">€ 750.000</option>
+                        <option value="800000">€ 800.000</option>
+                        <option value="900000">€ 900.000</option>
+                        <option value="1000000">€ 1.000.000</option>
+                        <option value="1250000">€ 1.250.000</option>
+                        <option value="1500000">€ 1.500.000</option>
+                        <option value="2000000">€ 2.000.000</option>
+                        <!-- <option selected="" value="ignore_filter">Geen maximum</option> -->
+                    </select>
+                </label>
+            </div>
+        <input type="submit" value="Zoek"/>
+
+    </section>
 </form>
 </section>

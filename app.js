@@ -1,4 +1,6 @@
+// envs setup
 require('dotenv').config();
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -6,16 +8,14 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var template  = require('express-handlebars');
-var routes = require("./routes.js");
+var routes = require("./routes/paths.js");
+var compression = require('compression');
 
 
 var app = express();
 
-// envs setup
 
-var env = process.env.NODE_ENV || 'development';
-app.locals.ENV = env;
-app.locals.ENV_DEVELOPMENT = env == 'development';
+
 
 // view engine setup
 app.engine('handlebars', template({
@@ -25,6 +25,29 @@ app.engine('handlebars', template({
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'handlebars');
 
+// Faster middlewares src: https://engineering.gosquared.com/making-dashboard-faster
+function parallel(middlewares) {
+  return function (req, res, next) {
+    async.each(middlewares, function (mw, cb) {
+      mw(req, res, cb);
+    }, next);
+  };
+}
+
+// app.use(parallel([
+//   getUser,
+//   getSiteList,
+//   getCurrentSite,
+//   getSubscription
+// ]));
+
+// compression
+app.use(compression({
+    threshhold: 0,
+    filter: function (){
+        return true;
+    }
+}));
 // app.use(favicon(__dirname + '/public/img/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -32,12 +55,13 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), {  lastModified: false, maxAge: '1y' }));
 
-// Create routes
+// Create all routes
 for (var x in routes) {
     app.use(x, routes[x]);
 }
+
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -47,7 +71,6 @@ app.use(function(req, res, next) {
 });
 
 /// error handlers
-
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
@@ -72,5 +95,6 @@ app.use(function(err, req, res, next) {
     });
 });
 
-
-module.exports = app;
+var server = app.listen(3000, function() {
+  console.log('Express server listening on port ' + server.address().port);
+});

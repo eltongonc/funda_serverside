@@ -10,13 +10,10 @@ router.get('/', function(req, res) {
 });
 
 router.get('/:id', function(req, res) {
-    console.log(req.params);
     var url = `http://partnerapi.funda.nl/feeds/Aanbod.svc/json/detail/${key}/koop/${req.params.id}/`;
-    console.log(url);
 
     request(url, function (error, response, data) {
-        console.log(data);
-        // res.render('detail', { title: "Funda", data:JSON.parse(data) });
+        res.render('detail', { title: "Funda", data:JSON.parse(data) });
     });
 
 });

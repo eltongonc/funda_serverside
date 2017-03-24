@@ -1,14 +1,23 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width">
-  <title>{{title }}</title>
-  <link rel="stylesheet" href="/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>{{title }}</title>
+
+    <!-- critical css -->
+    {{> loadcss}}
+    {{> criticalcss}}
+    <script> loadCSS('/css/style.css'); </script>
+    <noscript>
+        <link rel="stylesheet" href="/css/style.css">
+    </noscript>
+
+    <script src="/js/script.min.js" defer></script>
 </head>
 <body>
     {{> header}}
     {{{body}}}
-    <script src="/js/script.js"></script>
+
 </body>
 </html>
