@@ -6,8 +6,8 @@ Funda serverside is an serverside application that runs on Node.js + Express.
 -  Average grade B on [gtetrix.com](https://gtmetrix.com/)
 -  85/100 on [Google insights](https://developers.google.com/speed/pagespeed/insights/?url=http%3A%2F%2F881bfce9.ngrok.io%2F&tab=desktop)
 
-![Google insights](https://github.com/eltongonc/funda_serverside/tree/master/screenshot/google.png)
-![gtmetrix](https://github.com/eltongonc/funda_serverside/tree/master/screenshot/gtmetrix.png)
+![Google insights](https://github.com/eltongonc/funda_serverside/tree/master/screenshots/google.png)
+![gtmetrix](https://github.com/eltongonc/funda_serverside/tree/master/screenshots/gtmetrix.png)
 
 
 ## Usage
@@ -17,13 +17,16 @@ To use this app you'll need a KEY stored in `.env` file
 KEY=1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwer
 ```
 
-then run ` npm start`
+then run
+```text
+ npm start
+ ```
 
 
 
 ## Example
 
-![Funda](https://github.com/eltongonc/funda_serverside/tree/master/screenshot/funda.png)
+![Funda](https://github.com/eltongonc/funda_serverside/tree/master/screenshots/funda.png)
 
 
 <!-- ## Size
