@@ -1,3 +1,18 @@
 <script defer>
     var l=document.querySelectorAll("header li");l.forEach(function(i){i.firstChild.href===location.href?i.firstChild.classList.add("active"):i.firstChild.classList.remove("active")});
 </script>
+<script>
+
+// This code checks to see if the service worker API is available, and if it is, the service worker at /sw.js is registered once the page is loaded.
+if ('serviceWorker' in navigator) {
+    self.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js').then(function(registration) {
+            // Registration was successful
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }).catch(function(err) {
+            // registration failed :(
+            console.log('ServiceWorker registration failed: ', err);
+        });
+    });
+}
+</script>
