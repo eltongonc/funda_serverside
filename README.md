@@ -55,9 +55,9 @@ The site took 11.52 seconds to completely load and 2.13s to load the DOM(Documen
 
 As seen on the picture above, the images are the biggest in size and take the most time to load. The images come directly from the api, I haven't found a way to make them smaller.
 
-- [x]Added critical css the load style async above the screen fold.
-- [x]Wrapped images in a picture element. This renders an image depending on the width of the screen
-- [x]Minified and compressed all CSS and JavaScript.
+- [x] Added critical css the load style async above the screen fold.
+- [x] Wrapped images in a picture element. This renders an image depending on the width of the screen
+- [x] Minified and compressed all CSS and JavaScript.
 
 I receive these grades:
 ![Google - 85 /100](https://raw.githubusercontent.com/eltongonc/funda_serverside/master/screenshots/google.png)
