@@ -4,7 +4,7 @@
   "private": true,
   "main": "app.js",
   "scripts": {
-    "start": "npm run uglify:js && npm run live && nodemon app.js",
+    "start": "npm run uglify:js && npm run uglify:css && nodemon app.js",
     "live": "ngrok http 3000",
     "uglify:js": "uglifyjs ./public/js/*.js --compress --mangle --name-cache  --support-ie8    -o ./public/js/script.min.js",
     "uglify:css": "uglifycss ./public/css/style.css > ./public/css/style.min.css"
