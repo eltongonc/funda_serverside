@@ -150,8 +150,7 @@ form.home input[type="text"] {
 section input[type="radio"],
 section input[type="checkbox"] {
   opacity: 0;
-  position: absolute;
-  left: 9999999; }
+  position: absolute; }
 
 input + label {
   transition: .3s;
@@ -391,8 +390,7 @@ main {
 main section input[type="radio"],
 main section input[type="checkbox"] {
   opacity: 0;
-  position: absolute;
-  left: 9999999; }
+  position: absolute; }
 
 main fieldset input + label {
   transition: .3s;

@@ -51,7 +51,7 @@ app.use(parallel([
 ]));
 
 
-// app.use(favicon(__dirname + '/public/img/favicon.ico'));
+app.use(favicon(__dirname + '/public/img/favicon.ico'));
 
 // Create all routes
 for (var x in routes) {
