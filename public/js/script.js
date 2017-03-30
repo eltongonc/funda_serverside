@@ -26,10 +26,10 @@ if (input.element) {
 // Apicall
 // src: Merlijn Vos
 function JSONP(url, callback) {
-	let callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
+	var callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
 
-    const script = document.createElement('script');
-    script.src = url + (url.indexOf('?') >= 0 ? '&' : '?') + 'callback=' + callbackName
+    var script = document.createElement('script');
+    script.src = url + (url.indexOf('?') >= 0 ? '&' : '?') + 'callback=' + callbackName;
     document.body.appendChild(script);
 
 	self[callbackName] = function (data) {
@@ -48,7 +48,7 @@ function callback(data){
     }else {
         suggestList.classList.remove("hidden");
         for (var i = 0; i < data.Results.length; i++) {
-            suggestList.innerHTML += `<li onClick="updateInput('${data.Results[i].Display.Naam}')">${data.Results[i].Display.Naam}</li>`
+            suggestList.innerHTML += "<li onClick='updateInput(\""+data.Results[i].Display.Naam+"\")'>"+data.Results[i].Display.Naam+"</li>";
         }
     }
 }

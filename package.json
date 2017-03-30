@@ -4,8 +4,9 @@
   "private": "true",
   "main": "app.js",
   "scripts": {
-    "start": "npm run uglify:js && npm run uglify:css && critical:css && nodemon app.js",
+    "start": "nodemon app.js",
     "live": "ngrok http 3000",
+    "bundle": "npm run uglify:js && npm run uglify:css && npm run critical:css",
     "uglify:js": "uglifyjs ./public/js/*.js --compress --mangle --name-cache  --support-ie8    -o ./public/js/script.min.js",
     "uglify:css": "uglifycss ./public/css/style.css > ./public/css/style.min.css",
     "critical:css": "node criticalCSS.js"

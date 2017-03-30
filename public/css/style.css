@@ -54,7 +54,7 @@ header {
 /**
 ** Homepage
 **/
-header + .home_content {
+header + section.home_content {
     height: 40vh;
     background-color: rgb(230,242,247);
     background-image: url("/img/banner.svg");
@@ -64,17 +64,17 @@ header + .home_content {
     display: flex;
     justify-content: space-around;*/
 }
-header + .home_content span {
+header + section.home_content span {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: bottom;
     height: 100%;
 }
-header + .home_content span:first-child {
+header + section.home_content span:first-child {
     background-image: url("/img/superman.svg");
     width: 8em;
 }
-header + .home_content span:last-child {
+header + section.home_content span:last-child {
     background-image: url("/img/eengezins-rechts.svg");
     width: 20em;
 }
@@ -455,11 +455,26 @@ main fieldset label {
 .select ul li{
     line-height: 2.5em;
     padding-left: 1em;
+    cursor: pointer;
 }
 .select ul li:nth-child(odd){
     background: #ededed;
 }
 
+
+
+/**
+** footer
+**/
+body > footer {
+    background: #ededed;
+    height: 10rem;
+}
+
+
+/**
+** Helpers
+**/
 .hidden {
     display: none;
     height: 0%;

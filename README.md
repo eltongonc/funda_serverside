@@ -71,8 +71,10 @@ Because this was a three week project there is still a lot that can to be implem
 ### Features
 
 - Get a list of houses based on a search query.
+- Navigate though pages
+- Search houses via URL
 - View and get information about a house.
-- Ja
+- Autosuggest a place while filling the input field
 
 
 ### Wishlist
@@ -87,19 +89,21 @@ This project is still in development. I'm currently working on a wizzard on the 
 - [ ] Receive an 100/100 score on [Google insights](https://developers.google.com/speed/pagespeed/insights)
 - [ ] Cache files to improve the speed
 - [ ] Add a server worker for hybrid functionalities
+- [ ] Skip to last page link for search result list
 
 
 ## How to contribute
-You can help improve this project by sharing your expertise and tips, as well as learn from others. Contributions of all kinds are welcome: reporting issues, updating documentation, fixing bugs, building examples, sharing projects, and any other tips that may me improve my code.
+You can help improve this project by sharing your expertise and tips. Contributions of all kinds are welcome: reporting issues, updating documentation, fixing bugs, building examples, sharing projects, and any other tips that may improve my code.
 
 
 ## Example
-Because this project requires a key I shall not make it live
+Because this project requires a key I shall not make it public, but feel free to contact Funda for a key (no guarantee).
 
 
 ### Built With
-- Node.js with an Express.js framework.
+- Node.js with an Express.js framework - Server.
 - Handlebars - Serverside templating.
+- JavaScript (mixed ES5 and ES6) - Client.
 - CSS for the styling.
 
 <!-- ### Log
