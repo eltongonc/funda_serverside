@@ -19,15 +19,17 @@
 </section>
 
 <footer>
-    <nav>
+    <h4>Aantal pagina's: {{data.Paging.AantalPaginas}}</h4>
+
+    {{#if data.Paging.VorigeUrl }}
+        <a href="{{#replace data.Paging.VorigeUrl }}{{/replace}}" id="{{data.Paging.VorigeUrl}}">Vorige</a>
+    {{/if}}
+    <p>Pagina {{data.Paging.HuidigePagina}}</p>
+    {{#if data.Paging.VolgendeUrl }}
+        <a href="{{#replace data.Paging.VolgendeUrl }}{{/replace}}" id="{{data.Paging.VolgendeUrl}}">Volgende</a>
+    {{/if}}
+    <!-- <nav>
         <ul>
-            <li>Aantal pagina's: {{data.Paging.AantalPaginas}}</li>
-            {{#if data.Paging.VorigeUrl }}
-                <li><a href="{{#replace data.Paging.VorigeUrl }}{{/replace}}" id="{{data.Paging.VorigeUrl}}">Vorige</a></li>
-            {{/if}}
-            {{#if data.Paging.VolgendeUrl }}
-                <li><a href="{{#replace data.Paging.VolgendeUrl }}{{/replace}}" id="{{data.Paging.VolgendeUrl}}">Volgende</a></li>
-            {{/if}}
         </ul>
-    </nav>
+    </nav> -->
 </footer>

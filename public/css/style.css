@@ -467,8 +467,11 @@ main fieldset label {
 ** footer
 **/
 body > footer {
-    background: #ededed;
-    height: 10rem;
+    border-top:0.1rem solid #ededed;
+    border-bottom:0.1rem solid #ededed;
+    /*height: 3rem;*/
+    padding: 1em;
+    text-align: center;
 }
 
 
