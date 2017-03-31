@@ -20,20 +20,20 @@ self.addEventListener('install', event => event.waitUntil(
 
 self.addEventListener('fetch', function(event) {
     const request = event.request;
-    if (request.mode === 'navigate') {
-        event.respondWith(
-            fetch(request)
-                .then(response => cachePage(request, response))
-                .catch(err => getCachedPage(request))
-                .catch(err => fetchCoreFile('/offline/'))
-        );
-    } else {
+    // if (request.mode === 'navigate') {
+    //     event.respondWith(
+    //         fetch(request)
+    //             .then(response => cachePage(request, response))
+    //             .catch(err => getCachedPage(request))
+    //             .catch(err => fetchCoreFile('/offline/'))
+    //     );
+    // } else {
         event.respondWith(
             fetch(request)
                 .catch(err => fetchCoreFile(request.url))
                 .catch(err => fetchCoreFile('/offline/'))
         );
-    }
+    // }
 });
 
 function cachePage(request, response) {

@@ -22,11 +22,11 @@
     <h4>Aantal pagina's: {{data.Paging.AantalPaginas}}</h4>
 
     {{#if data.Paging.VorigeUrl }}
-        <a href="{{#replace data.Paging.VorigeUrl }}{{/replace}}" id="{{data.Paging.VorigeUrl}}">Vorige</a>
+        <a href="/house{{#replace data.Paging.VorigeUrl }}{{/replace}}" id="{{data.Paging.VorigeUrl}}">Vorige</a>
     {{/if}}
     <p>Pagina {{data.Paging.HuidigePagina}}</p>
     {{#if data.Paging.VolgendeUrl }}
-        <a href="{{#replace data.Paging.VolgendeUrl }}{{/replace}}" id="{{data.Paging.VolgendeUrl}}">Volgende</a>
+        <a href="/house{{#replace data.Paging.VolgendeUrl }}{{/replace}}" id="{{data.Paging.VolgendeUrl}}">Volgende</a>
     {{/if}}
     <!-- <nav>
         <ul>
