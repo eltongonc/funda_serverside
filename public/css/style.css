@@ -443,11 +443,14 @@ main fieldset label {
     display: flex;
     flex-direction: column;
 }
-
 .autocomplete input{
     /*width: 100%;*/
     transition: 1s;
 }
+.autocomplete li{
+    cursor: pointer;
+}
+
 .select ul {
     height: 100%;
     padding: 0;

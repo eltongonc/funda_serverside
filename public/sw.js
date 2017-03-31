@@ -3,9 +3,9 @@ var CACHE_NAME_CORE = 'funda-v1-core';
 var CACHE_NAME_PAGES = 'funda-v1-pages';
 var urlsToCache = [
     '/img/logo.svg',
-    '/offline'
-    // '/css/style.css',
-    // '/js/script.js'
+    '/offline/',
+    '/css/style.min.css',
+    '/js/script.js'
 ];
 
 
@@ -20,20 +20,20 @@ self.addEventListener('install', event => event.waitUntil(
 
 self.addEventListener('fetch', function(event) {
     const request = event.request;
-    // if (request.mode === 'navigate') {
-    //     event.respondWith(
-    //         fetch(request)
-    //             .then(response => cachePage(request, response))
-    //             .catch(err => getCachedPage(request))
-    //             .catch(err => fetchCoreFile('/offline/'))
-    //     );
-    // } else {
+    if (request.mode === 'navigate') {
+        event.respondWith(
+            fetch(request)
+                .then(response => cachePage(request, response))
+                .catch(err => getCachedPage(request))
+                .catch(err => fetchCoreFile('/offline/'))
+        );
+    } else {
         event.respondWith(
             fetch(request)
                 .catch(err => fetchCoreFile(request.url))
-                .catch(err => fetchCoreFile('/offline'))
+                .catch(err => fetchCoreFile('/offline/'))
         );
-    // }
+    }
 });
 
 function cachePage(request, response) {

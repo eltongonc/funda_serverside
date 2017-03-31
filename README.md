@@ -90,6 +90,7 @@ This project is still in development. I'm currently working on a wizzard on the 
 - [ ] Cache files to improve the speed
 - [ ] Add a server worker for hybrid functionalities
 - [ ] Skip to last page link for search result list
+- [ ] User feedback
 
 
 ## How to contribute

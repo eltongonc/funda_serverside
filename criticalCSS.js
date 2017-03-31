@@ -7,7 +7,7 @@ var penthouse = require("penthouse")
 //default configuration for penthouse
 var config = {
     url: "http://localhost:3000",
-    css : path.resolve(__dirname+"/public/css/style.css"),
+    css : path.resolve(__dirname+"/public/css/style.min.css"),
     height : 900,
     width : 1300,
     strict: false,

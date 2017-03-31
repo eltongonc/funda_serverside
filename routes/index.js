@@ -10,55 +10,12 @@ var request = require("request");
 **/
 router.get('/', function(req, res) {
     var url = `http://partnerapi.funda.nl/feeds/Aanbod.svc/json/${key}/?type=koop&zo=/heel-nederland/&page=1&pagesize=25`;
-    console.log(res.locals);
 
     request(url, function (error, response, data) {
       res.render('index', { title: "Funda", data:JSON.parse(data), replace: arg => arg.replace("/~","") });
     });
 });
 
-
-/****
-** Api
-****/
-router.get(/api/, function(req, res) {
-
-    var query = req.path;
-    // Very ugly!I know. Turning "/api/koop/heel-nederland/p2/" to "koop", "heel-nederland" and "2"
-    var pagenumber = query.match(/\/p[0-9]*\//) ? query.match(/\/p[0-9]*\//)[0].split("/p")[1].split("/")[0] : 1;
-    var type = query.split("/")[2];
-    var zo = query.replace("/api","").replace(/(huur||koop)/, "").replace(/\/p[0-9]*\//, "").replace(/^\/[a-zA-Z]*\//,"");
-
-    console.log(req.path);
-    var url = req.path !== "/api/"?
-    `http://partnerapi.funda.nl/feeds/Aanbod.svc/json/${key}/?type=${type}&zo=/${zo}/&page=${pagenumber}&pagesize=25`
-    :
-    `http://partnerapi.funda.nl/feeds/Aanbod.svc/json/${key}/?type=koop&zo=/heel-nederland/&page=1&pagesize=25`;
-
-    request(url, function (error, response, data) {
-        // console.log(url);
-        res.send(data);
-    });
-});
-
-router.get(/(koop||huur)/, function(req, res) {
-    var query = req.path;
-    // Very ugly!I know. Turning "/koop/heel-nederland/p2/" to "koop", "heel-nederland" and "2"
-    var pagenumber = query.match(/\/p[0-9]*\//) ? query.match(/\/p[0-9]*\//)[0].split("/p")[1].split("/")[0] : 1;
-    var type = query.split("/")[1];
-    var zo = query.replace(/\/p[0-9]*\//, "").replace(/^\/[a-zA-Z]*\//,"");
-
-
-    var url = `http://partnerapi.funda.nl/feeds/Aanbod.svc/json/${key}/?type=${type}&zo=/${zo}/&page=${pagenumber}&pagesize=25`;
-
-    // console.log(url);
-    // res.send(url);
-    request(url, function (error, response, data) {
-        // console.log(data);
-      res.render('index', { title: "Funda", data:JSON.parse(data), replace: function(arg) {return arg.replace("/~","");} });
-    });
-    // res.send({zo,type, pagenumber});
-});
 
 
 
@@ -74,6 +31,44 @@ router.post('/', function(req, res) {
     request(url, function (error, response, data) {
       res.render('index', { title: "Funda", data:JSON.parse(data), replace: arg => arg.replace("/~","")  });
     });
+});
+
+
+
+/****
+** Api
+****/
+router.get(/api/, function(req, res) {
+    var query = req.path;
+    // Very ugly!I know. Turning "/api/koop/heel-nederland/p2/" to "koop", "heel-nederland" and "2"
+    var pagenumber = query.match(/\/p[0-9]*\//) ? query.match(/\/p[0-9]*\//)[0].split("/p")[1].split("/")[0] : 1;
+    var type = query.split("/")[2];
+    var zo = query.replace("/api","").replace(/(huur||koop)/, "").replace(/\/p[0-9]*\//, "").replace(/^\/[a-zA-Z]*\//,"");
+
+    var url = req.path !== "/api/"?
+    `http://partnerapi.funda.nl/feeds/Aanbod.svc/json/${key}/?type=${type}&zo=/${zo}/&page=${pagenumber}&pagesize=25`
+    :
+    `http://partnerapi.funda.nl/feeds/Aanbod.svc/json/${key}/?type=koop&zo=/heel-nederland/&page=1&pagesize=25`;
+
+    request(url, function (error, response, data) {
+        res.send(data);
+    });
+});
+
+router.get(/(koop||huur)/, function(req, res) {
+    var query = req.path;
+    // Very ugly!I know. Turning "/koop/heel-nederland/p2/" to "koop", "heel-nederland" and "2"
+    var pagenumber = query.match(/\/p[0-9]*\//) ? query.match(/\/p[0-9]*\//)[0].split("/p")[1].split("/")[0] : 1;
+    var type = query.split("/")[1];
+    var zo = query.replace(/\/p[0-9]*\//, "").replace(/^\/[a-zA-Z]*\//,"");
+
+    var url = `http://partnerapi.funda.nl/feeds/Aanbod.svc/json/${key}/?type=${type}&zo=/${zo}/&page=${pagenumber}&pagesize=25`;
+
+    request(url, function (error, response, data) {
+        console.log(data);
+        res.render('index', { title: "Funda", data:JSON.parse(data), replace: function(arg) {return arg.replace("/~","");} });
+    });
+    // res.send({zo,type, pagenumber});
 });
 
 
