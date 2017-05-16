@@ -50,7 +50,8 @@ $ npm run uglify:css
 
 ### Funda serverside: before
 This is an analysis of Funda homepage version in it's current state for common internet connection:
-| connection | DOM Content Loaded | Fully loaded  |
+
+| Connection | DOM Content Loaded | Fully loaded  |
 |------------|:------------------:|:-------------:|
 | GPRS       | 2.1 minutes        | 2.6 minutes   |
 | Good 2G    | 16.84 seconds      | 20.88 seconds |
