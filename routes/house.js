@@ -9,6 +9,14 @@ router.get('/', function(req, res) {
   res.send('respond with a resource');
 });
 
+router.get('/:id', function(req, res) {
+    var url = `http://partnerapi.funda.nl/feeds/Aanbod.svc/json/detail/${key}/koop/${req.params.id}/`;
+
+    request(url, function (error, response, data) {
+        res.render('detail', { title: "Funda", data:JSON.parse(data) });
+    });
+
+});
 
 router.get(/(koop||huur)/, function(req, res) {
     var query = req.path;
@@ -20,18 +28,9 @@ router.get(/(koop||huur)/, function(req, res) {
     var url = `http://partnerapi.funda.nl/feeds/Aanbod.svc/json/${key}/?type=${type}&zo=/${zo}/&page=${pagenumber}&pagesize=25`;
 
     request(url, function (error, response, data) {
-        console.log(data);
         res.render('index', { title: "Funda", data:JSON.parse(data), replace: function(arg) {return arg.replace("/~","");} });
     });
     // res.send({zo,type, pagenumber});
-});
-router.get('/:id', function(req, res) {
-    var url = `http://partnerapi.funda.nl/feeds/Aanbod.svc/json/detail/${key}/koop/${req.params.id}/`;
-
-    request(url, function (error, response, data) {
-        res.render('detail', { title: "Funda", data:JSON.parse(data) });
-    });
-
 });
 
 module.exports = router;

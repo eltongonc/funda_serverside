@@ -7,14 +7,13 @@
     <link href="/manifest.json" rel="manifest">
 
     <!-- critical css -->
-    {{> loadcss}}
     {{> criticalcss}}
+    {{> javascript}}
     <script> loadCSS('/css/style.css'); </script>
     <noscript>
-        <link rel="stylesheet" href="/css/style.css">
+        {{>stylesheet}}
     </noscript>
 
-    {{> javascript}}
 </head>
 <body>
     {{> header}}

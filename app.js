@@ -38,7 +38,7 @@ app.use(compression({
     filter: function (){
         return true;
     }
-}));
+}))
 
 app.use(parallel([
     logger('dev'),
@@ -47,11 +47,9 @@ app.use(parallel([
         extended: true
     }),
     cookieParser(),
-    express.static(path.join(__dirname, 'public'), {  lastModified: false, maxAge: '1y' })
+    express.static(path.join(__dirname, 'public'), {  lastModified: false, maxAge: '1y' }),
+    favicon(__dirname + '/public/img/favicon.ico')
 ]));
-
-
-app.use(favicon(__dirname + '/public/img/favicon.ico'));
 
 
 // Create all routes

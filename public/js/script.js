@@ -1,5 +1,6 @@
 var axios = require('axios');
 var jsonp = require('fetch-jsonp');
+var lazysizes = require('lazysizes');
 
 var suggestList = document.querySelector('#autocomplete-list');
 
@@ -67,20 +68,22 @@ function apiCall(url){
 function generateContent(data){
     var container = document.querySelector('form.home+section');
     for (var i = 0; i < data.Objects.length; i++) {
-        container.innerHTML +=`
-        <article>
-            <img height="200" src="${data.Objects[i].FotoMedium}" alt="${data.Objects[i].Adres}" />
-            <h1>
-                <a id="${data.Objects[i].Id}" href="/house/${data.Objects[i].Id}">${data.Objects[i].Adres}</a>
-                <small>${data.Objects[i].Postcode} ${data.Objects[i].Woonplaats}</small>
-            </h1>
-            <p><strong>${data.Objects[i].PrijsGeformatteerdHtml}</strong></p>
+        container.innerHTML +=
 
-            <footer>
-                <p>${data.Objects[i].Woonoppervlakte}m<span class="sup">2</span> / ${data.Objects[i].Perceeloppervlakte}m<span class="sup">2</span>
-                <p class="kamers">${data.Objects[i].AantalKamers} Kamers</span></p>
-            </footer>
-        </article>`;
+        '<article>'+
+            '<img height="200" class="lazyload" src="'+data.Objects[i].FotoMedium+'" alt="'+data.Objects[i].Adres+'" />'+
+            '<h1>'+
+                '<a id="'+data.Objects[i].Id+'" href="/house/'+data.Objects[i].Id+'">'+
+                    data.Objects[i].Adres+
+                '</a>'+
+                '<small>'+data.Objects[i].Postcode+' '+data.Objects[i].Woonplaats+'</small>'+
+            '</h1>'+
+            '<p><strong>'+data.Objects[i].PrijsGeformatteerdHtml+'</strong></p>'+
+            '<footer>'+
+                '<p>'+data.Objects[i].Woonoppervlakte+'m<span class="sup">2</span> / '+data.Objects[i].Perceeloppervlakte+'m<span class="sup">2</span>'+
+                '<p class="kamers">'+data.Objects[i].AantalKamers+' Kamers</span></p>'+
+            '</footer>'+
+        '</article>';
     }
 }
 

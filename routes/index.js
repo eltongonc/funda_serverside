@@ -40,7 +40,6 @@ router.post('/', function(req, res) {
 ****/
 router.get(/api/, function(req, res) {
     var query = req.path;
-    console.log(query);
     // Very ugly!I know. Turning "/api/koop/heel-nederland/p2/" to "koop", "heel-nederland" and "2"
     var pagenumber = query.match(/\/p[0-9]*\//) ? query.match(/\/p[0-9]*\//)[0].split("/p")[1].split("/")[0] : 1;
     var type = query.split("/")[2];
@@ -51,10 +50,8 @@ router.get(/api/, function(req, res) {
     :
     `http://partnerapi.funda.nl/feeds/Aanbod.svc/json/${key}/?type=koop&zo=/heel-nederland/&page=1&pagesize=25`;
 
-    console.log(url);
     request(url, function (error, response, data) {
         if (error) throw error;
-        console.log(data);
         res.send(JSON.parse(data));
     });
 });

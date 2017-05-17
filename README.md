@@ -10,6 +10,10 @@ First clone this repo with:
 ```txt
 $ git clone https://github.com/eltongonc/funda_serverside.git
 ```
+Install the dependencies:
+```txt
+$ npm install
+```
 
 An API-key is required to run this project. Contact Funda for a key. When you have a key place it the `.env` file in this format:
 ```txt
@@ -25,26 +29,28 @@ funda_serverside/
 ├── package.json
 ├── app.js
 └── README.md
-
 ```
 
 then run
 ```
 $ npm start
 ```
- this should minify and uglify the javascript and css.
- To run these tasks manually use:
- ```text
-$ npm run uglify:js
-$ npm run uglify:css
+ this should run a local server on `localhost:3000`.
+
+
+For a live development server, keep the local server terminal open, open another one and run:
  ```
+ $ npm run live
+ ```
+this should give you a http and https link in this format: `http://xxxxxxxx.ngrok.io` and `https://xxxxxxxx.ngrok.io`.
+Copy on of these links and paste it in your browser.
 
 
 ## Screenshots
-**Full page**
+##### Full page
 ![Funda](/screenshots/funda-screenshot.png)
 
-**Auto suggest**
+##### Auto suggest
 ![Auto suggest](/screenshots/autosuggest.png)
 
 ## Performance
@@ -80,20 +86,18 @@ This is an analysis of [Funda homepage](www.funda.nl) version in it's current st
 After analyzing [Funda](www.funda.nl) I noticed that the fully loaded time could be better. Also the mobile version doesn't score high enough.
 
 ## To-do
-- [x] Server Gzip
-- [x] CSS Optimization
-- [x] Image compression
-- [x] Service worker
-- [x] Javascript compression
-- [ ] Screen-reader
-
+- Server Gzip
+- CSS Optimization
+- Image compression
+- Service worker
+- Javascript compression
 
 
 ### Optimizations
 A series of tests were done with chromes internet connection throttling. These internet speed-tests emulate how people with a slow connection experience a website. The connections exist of GPRS, Good 2G, Good 3G, Regular 4G and Wifi with disabled cache.
 
 #### Node.js + Express.js
-This step was mainly rebuilding the homepage of Funda to illustrate how the webapp could be optimised with a Node.js server. Serving html files from the server can boost the overall speed, but because this is a rebuild it wouldn't be fair to compare it to the previous table.
+This step was mainly rebuilding the homepage of Funda to illustrate how the webapp could be optimised with a Node.js server. Serving html files from the server can boost the overall speed, but because this is a rebuild it wouldn't be fair to compare it to the previous table. The next table will
 
 ##### Results
 
@@ -106,6 +110,7 @@ This step was mainly rebuilding the homepage of Funda to illustrate how the weba
 | Wifi       | 6.48 seconds       | 8.88  seconds |
 
 #### GZIP
+To GZIP the files I used a module called compression.
 ```js
 // compression
 app.use(compression({
@@ -113,22 +118,12 @@ app.use(compression({
   filter:  true
 }));
 ```
-##### Results
-| connection | DOM Content Loaded | Fully loaded  |
-|------------|:------------------:|:-------------:|
-| GPRS       | 25.44 seconds      | 7.7 minutes   |
-| Good 2G    | 3.43 seconds       | 51.80 seconds |
-| Good 3G    | 1.78 seconds       | 15.39 seconds |
-| Regular 4G | 2.08 seconds       | 7.09  seconds |
-| Wifi       | 1.75 seconds       | 3.08  seconds |
-
 
 #### CSS Optimization
 To increase the overall speed I generated some critical-css. The criticalCSS is the style that the site needs above the page fold.
-To view these changes change branch with `$ git checkout ft-css-optimization` and run `$ npm run criticalCSS` this will generate a bundled criticalCSS in the `public` folder
 
 ##### Penthouse module
-The `criticalCSS-generator.js` file loops through all files in the `/public/css/` folder and checks for css that can be applied on the viewport with the `penthouse node module`.
+The `criticalCSS-generator.js` file loops through all files in the `/public/css/` folder and checks for css that can be applied on the viewport with the `penthouse node module`. It then continues to generate a criticalCSS file.
 
 ##### criticalCSS-generator.js
 ```js
@@ -159,84 +154,50 @@ To use the criticalCSS I used a module called loadCSS. This functions makes sure
     </noscript>
 ```
 
-##### Results
-
-| connection | DOM Content Loaded | Fully loaded  |
-|------------|:------------------:|:-------------:|
-| GPRS       | 25.84 seconds     | 8.9 minutes   |
-| Good 2G    | 3.58 seconds      | 1.0 minutes   |
-| Good 3G    | 2.56 seconds      | 18.68 seconds |
-| Regular 4G | 2.12 seconds      | 8.26  seconds |
-| Wifi       | 2.17 seconds      | 4.0   seconds |
-
 
 #### Images Optimization
-As stated before the images are one of the reasons why the webapp is slow.
-The images are replace with a compressed version. No difference is visible.
-To view these changes change branch with `$ git checkout ft-img-optimization`.
-
-### Image Optimization results
-
-| connection | DOM Content Loaded | Fully loaded  |
-|------------|:------------------:|:-------------:|
-| GPRS       | 1.9 minutes        | 7.1 minutes   |
-| Good 2G    | 13.19 seconds      | 47.77 seconds |
-| Good 3G    | 4.52 seconds       | 14.44 seconds |
-| Regular 4G | 2.16 seconds       | 5.87  seconds |
-| Wifi       | 2.30 seconds       | 4.02  seconds |
+I did not find a way to optimize the images, because images are stored on a externa; server.
 
 
-## Javascript Optimization
-Added a defer attribute on the script tags to load when the content is done loading  `$ git checkout ft-js-optimization`.
-
-### Results
-
-| connection | DOM Content Loaded | Fully loaded  |
-|------------|:------------------:|:-------------:|
-| GPRS       | 15.83 seconds      | 8.7 minutes   |
-| Good 2G    | 1.84 seconds       | 59.62 seconds |
-| Good 3G    | 1.75 seconds       | 17.64 seconds |
-| Regular 4G | 1.31 seconds       | 6.88  seconds |
-| Wifi       | 1.45 seconds       | 3.38  seconds |
+#### Javascript Optimization
+- All javascript are inline and minified.
+- Put all javascript in the header for `non-blocking` javascript.
+- Added a `defer` attribute on the script tags. This makes sure that javascript will load after the page is done loading.
 
 
-
-## Funda serverside: After
+### Funda serverside: After
 Here are the results of the changes made to Funda serverside:
 
 | connection | DOM Content Loaded | Fully loaded  |
 |------------|:------------------:|:-------------:|
 | GPRS       | 3.02 seconds       | 56.88 seconds |
-| Good 2G    | 1.97 seconds       | 7.97 seconds  |
-| Good 3G    | 1.60 seconds       | 4.26 seconds  |
-| Regular 4G | 1.92 seconds       | 3.89 seconds  |
-| Wifi       | 2.20 seconds       | 4.01 seconds  |
+| Good 2G    | 1.55 seconds       | 7.33 seconds  |
+| Good 3G    | 1.24 seconds       | 3.23 seconds  |
+| Regular 4G | 1.47 seconds       | 2.83 seconds  |
+| Wifi       | 1.26 seconds       | 2.26 seconds  |
 
-### Overview [Webpagetest](https://www.webpagetest.org)
-**Score**
+#### Overview [Webpagetest](https://www.webpagetest.org)
 
-![Overview](screenshots/after-score.png)
 
-**Content loaded**
-
+##### Content loaded
 ![Content](screenshots/after-content.png)
 
 
-**Page load**
-
+##### Page load
 ![Loadspeed](screenshots/after-load.png)
 
-### Overview [Webpagetest](https://www.webpagetest.org)
-**Score**
+#### Overview [Webpagetest](https://www.webpagetest.org)
 
+##### Score - desktop
 ![Google insight score desktop](screenshots/after-google-insight-desktop.png)
+##### Score - mobile
 ![Google insight score mobile](screenshots/after-google-insight-mobile.png)
 
 
-### Conclusion
-The site is much faster after applying the changes. Rendering the files on the server will give it a boost in performance. Loading the page async helps the DOM content te be loaded much faster.
+#### Conclusion
+The site is much faster after applying the changes. Rendering the files on the server will give it a boost in performance. Loading the page async helps the DOM content te be loaded much faster. I didn't succeed in making the images smaller, but I managed to score better for mobile.
 
-## Improving the app
+## Contributing to the app
 Because this was a three week project there is still a lot that can to be implemented. Below is a list of features already in the app and a wishlist of features.
 
 ### Features
@@ -266,13 +227,6 @@ Because this project requires a key I shall not make it live.
 - Handlebars - Serverside templating.
 - CSS for the styling.
 
-<!-- ### Log
-Week1 - JavaScript objects & patterns
-Week2 - Data, routing & templating
-Week3 - User feedback -->
 
 ### Author
-
 Elton Gonçalves Gomes - checkout more of my work on [github](https://github.com/eltongonc)
-
-<!-- ## Licensing -->

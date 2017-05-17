@@ -23,13 +23,16 @@
     "express": "^4.13.3",
     "express-handlebars": "^3.0.0",
     "fetch-jsonp": "^1.0.6",
+    "images-cache": "^1.4.1",
     "jsonp": "^0.2.1",
+    "lazysizes": "^4.0.0-rc1",
     "morgan": "^1.6.1",
     "nodemon": "^1.11.0",
     "request": "^2.81.0",
     "serve-favicon": "^2.3.0"
   },
   "devDependencies": {
+    "babelify": "^7.3.0",
     "browserify": "^14.3.0",
     "chai": "^3.5.0",
     "debug": "^2.2.0",
