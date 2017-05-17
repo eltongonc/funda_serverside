@@ -204,6 +204,8 @@ Because this was a three week project there is still a lot that can to be implem
 - Get a list of houses based on a search query.
 - View and get information about a house.
 - Lazy loading
+- Infinite scroll
+- Autosuggest locations
 
 
 ### Wishlist
