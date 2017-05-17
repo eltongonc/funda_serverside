@@ -5,27 +5,61 @@ var key = process.env.KEY;
 var request = require("request");
 
 
-/* GET home page. */
+/**
+** GETs
+**/
 router.get('/', function(req, res) {
     var url = `http://partnerapi.funda.nl/feeds/Aanbod.svc/json/${key}/?type=koop&zo=/heel-nederland/&page=1&pagesize=25`;
 
     request(url, function (error, response, data) {
-      res.render('index', { title: "Funda", data:JSON.parse(data) });
+      res.render('index', { title: "Funda", data:JSON.parse(data), replace: arg => arg.replace("/~","") });
     });
 });
+
+
+
 
 
 /****
-** Posts
+** POSTs
 ****/
 router.post('/', function(req, res) {
     var url = generateURL(req.body);
+    res.locals.url = url;
+
     // res.send(url)
     request(url, function (error, response, data) {
-      res.render('index', { title: "Funda", data:JSON.parse(data) });
+      res.render('index', { title: "Funda", data:JSON.parse(data), replace: arg => arg.replace("/~","")  });
     });
 });
-// "koop/amsterdam/+1km/50000-75000/"
+
+
+
+/****
+** Api
+****/
+router.get(/api/, function(req, res) {
+    var query = req.path;
+    console.log(query);
+    // Very ugly!I know. Turning "/api/koop/heel-nederland/p2/" to "koop", "heel-nederland" and "2"
+    var pagenumber = query.match(/\/p[0-9]*\//) ? query.match(/\/p[0-9]*\//)[0].split("/p")[1].split("/")[0] : 1;
+    var type = query.split("/")[2];
+    var zo = query.replace("/api","").replace(/(huur||koop)/, "").replace(/\/p[0-9]*\//, "").replace(/^\/[a-zA-Z]*\//,"");
+
+    var url = query !== "/api/"?
+    `http://partnerapi.funda.nl/feeds/Aanbod.svc/json/${key}/?type=${type}&zo=/${zo}/&page=${pagenumber}&pagesize=25`
+    :
+    `http://partnerapi.funda.nl/feeds/Aanbod.svc/json/${key}/?type=koop&zo=/heel-nederland/&page=1&pagesize=25`;
+
+    console.log(url);
+    request(url, function (error, response, data) {
+        if (error) throw error;
+        console.log(data);
+        res.send(JSON.parse(data));
+    });
+});
+
+
 
 function generateURL(options){
     var url = {

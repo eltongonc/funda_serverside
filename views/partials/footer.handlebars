@@ -1,6 +1,6 @@
 <section>
 
-    <h3>{{data.TotaalAantalObjecten}} resultaten voor "{{data.Metadata.Titel}}""</h3>
+    <h3>{{data.TotaalAantalObjecten}} resultaten voor "{{data.Metadata.Omschrijving}}"</h3>
     {{#each data.Objects}}
     <article>
         <img height="200" src="{{FotoMedium}}" alt="{{Adres}}" />
@@ -17,14 +17,19 @@
     </article>
     {{/each}}
 </section>
-<nav>
-    <ul>
-        <li>Aantal pagina's: {{data.Paging.AantalPaginas}}</li>
-        {{#if data.Paging.VolgendeUrl }}
-        <li><a href="{{data.Paging.VolgendeUrl}}" id="{{data.Paging.VolgendeUrl}}">Volgende</a></li>
-        {{/if}}
-        {{#if data.Paging.VorigeUrl }}
-        <li><a href="{{data.Paging.VorigeUrl}}" id="{{data.Paging.VorigeUrl}}">Vorige</a></li>
-        {{/if}}
-    </ul>
-</nav>
+
+<footer>
+    <h4>Aantal pagina's: {{data.Paging.AantalPaginas}}</h4>
+
+    {{#if data.Paging.VorigeUrl }}
+        <a href="/house{{#replace data.Paging.VorigeUrl }}{{/replace}}" id="{{data.Paging.VorigeUrl}}">Vorige</a>
+    {{/if}}
+    <p>Pagina {{data.Paging.HuidigePagina}}</p>
+    {{#if data.Paging.VolgendeUrl }}
+        <a href="/house{{#replace data.Paging.VolgendeUrl }}{{/replace}}" id="{{data.Paging.VolgendeUrl}}">Volgende</a>
+    {{/if}}
+    <!-- <nav>
+        <ul>
+        </ul>
+    </nav> -->
+</footer>

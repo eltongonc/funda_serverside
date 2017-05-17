@@ -1,31 +1,38 @@
 <form class="home" action="/" method="post">
     <section class="header">
         <input id="koop" type="radio" name="type" value="koop" checked>
-        <label for="koop">Koop</label>
+
+        <label for="koop">Koopwoning</label>
 
         <input id="huur" type="radio" name="type" value="huur">
-        <label for="huur">Huur</label>
+        <label for="huur">Huurwoning</label>
     </section>
     <section class="location">
-        <input type="text" name="query" id="autocomplete-input" placeholder="Plaats, buurt, adres etc.">
-
+        <!-- <div class="autocomplete"> -->
         <div class="select">
-            <select name="radius" id="Afstand" autocomplete="off">
-                <option selected="" value="0">+ 0 km</option>
-                <option value="1">+ 1 km</option>
-                <option value="2">+ 2 km</option>
-                <option value="5">+ 5 km</option>
-                <option value="10">+ 10 km</option>
-                <option value="15">+ 15 km</option>
-            </select>
-            <!-- <label for="Afstand">Straal</label> -->
-        </div>
+            <label for="autocomplete-input">Zoeken in
+                <input type="text" name="query" id="autocomplete-input" placeholder="Plaats, buurt, adres etc.">
+            </label>
+
+                <select name="radius" id="Afstand" autocomplete="off">
+                    <option selected="" value="0">+ 0 km</option>
+                    <option value="1">+ 1 km</option>
+                    <option value="2">+ 2 km</option>
+                    <option value="5">+ 5 km</option>
+                    <option value="10">+ 10 km</option>
+                    <option value="15">+ 15 km</option>
+                </select>
+                <!-- <label for="Afstand">Straal</label> -->
+                <ul id="autocomplete-list" name="query" class="autocomplete-list hidden">
+                </ul>
+            </div>
+        <!-- </div> -->
 
             <div class="select">
                 <label for="range_van" >Van
                     <select id="range_van" name="prijs_van">
                         <!-- <option value="other">Anders</option> -->
-                        <option selected="" value="0">€ 0</option>
+                        <option selected value="0">€ 0</option>
                         <option value="50000">€ 50.000</option>
                         <option value="75000">€ 75.000</option>
                         <option value="100000">€ 100.000</option>
@@ -56,9 +63,7 @@
                         <option value="2000000">€ 2.000.000</option>
                     </select>
                 </label>
-            </div>
 
-            <div class="select">
                 <label for="range_tot">Tot
                     <select id="range_tot" name="prijs_tot" autocomplete="off">
                         <!-- <option value="other">Anders</option> -->
@@ -89,7 +94,7 @@
                         <option value="1000000">€ 1.000.000</option>
                         <option value="1250000">€ 1.250.000</option>
                         <option value="1500000">€ 1.500.000</option>
-                        <option value="2000000">€ 2.000.000</option>
+                        <option selected value="2000000">€ 2.000.000</option>
                         <!-- <option selected="" value="ignore_filter">Geen maximum</option> -->
                     </select>
                 </label>

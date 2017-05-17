@@ -54,7 +54,7 @@ header {
 /**
 ** Homepage
 **/
-header + section {
+header + section.home_content {
     height: 40vh;
     background-color: rgb(230,242,247);
     background-image: url("/img/banner.svg");
@@ -64,17 +64,17 @@ header + section {
     display: flex;
     justify-content: space-around;*/
 }
-header + section span {
+header + section.home_content span {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: bottom;
     height: 100%;
 }
-header + section span:first-child {
+header + section.home_content span:first-child {
     background-image: url("/img/superman.svg");
     width: 8em;
 }
-header + section span:last-child {
+header + section.home_content span:last-child {
     background-image: url("/img/eengezins-rechts.svg");
     width: 20em;
 }
@@ -95,6 +95,7 @@ form.home {
 
 form.home > section {
     width: 95%;
+    margin-bottom: .5em;
 }
 
 form.home .location {
@@ -108,22 +109,20 @@ div.select{
     margin-right: .5em;
     padding: 0em 0.5em;
     box-sizing: border-box;
-}
-
-div.select{
     border-radius: 0.2em;
 }
 @media (max-width: 40em){
     form.home input[type="text"],
     div.select{
         border-radius: 0em;
-        width: 100%;
         margin-bottom: 0.5em;
     }
 }
 
-div.select:first-of-type{
-    border-radius: 0 0.2em 0.2em 0;
+div.select{
+    border-radius: 0.2em;
+    overflow: hidden;
+    margin-bottom: .5em;
 }
 select{
     box-sizing: border-box;
@@ -135,13 +134,15 @@ select{
     border-radius: none;
 }
 
+label[for="autocomplete-input"]{
+
+}
 form.home input[type="text"] {
   padding: 1em 0.5em;
   border: none;
-  max-width: calc( 100% - 6em);
-  min-width: calc( 50% - 6em);
+  min-width: 13em;
   box-sizing: border-box;
-  margin: 1em 0;
+  margin: 0;
   font-size: 1em;
   margin-right: .1em;
   border-radius: 0.2em 0 0 0.2em;;
@@ -150,8 +151,7 @@ form.home input[type="text"] {
 section input[type="radio"],
 section input[type="checkbox"] {
   opacity: 0;
-  position: absolute;
-  left: 9999999; }
+  position: absolute; }
 
 input + label {
   transition: .3s;
@@ -186,12 +186,14 @@ label {
   padding: 0.8em 1em;
 }
 
-input[type="submit"]{
-    padding: 1em 2em;
+input[type="submit"] {
+    padding: 1.3em 2em;
     border: none;
     background: #0071B3;
     color: white;
     font-size: 1em;
+    border-radius: 0.2em;
+    margin-bottom: 0.5em;
 }
 
 form + section {
@@ -204,7 +206,7 @@ form + section {
 }
 form + section h3 {
     width: 100%;
-
+    margin-bottom: 1em;
 }
 
 @media (min-width: 50em){
@@ -391,8 +393,7 @@ main {
 main section input[type="radio"],
 main section input[type="checkbox"] {
   opacity: 0;
-  position: absolute;
-  left: 9999999; }
+  position: absolute; }
 
 main fieldset input + label {
   transition: .3s;
@@ -426,3 +427,62 @@ main fieldset label {
   main fieldset label figure {
     height: 3em;
     width: 4em; }
+
+
+
+
+/**
+** Autosuggest
+**/
+.location {
+    position: relative;
+}
+
+.autocomplete {
+    background: white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.autocomplete input{
+    /*width: 100%;*/
+    transition: 1s;
+}
+.autocomplete li{
+    cursor: pointer;
+}
+
+.select ul {
+    height: 100%;
+    padding: 0;
+}
+.select ul li{
+    line-height: 2.5em;
+    padding-left: 1em;
+    cursor: pointer;
+}
+.select ul li:nth-child(odd){
+    background: #ededed;
+}
+
+
+
+/**
+** footer
+**/
+body > footer {
+    border-top:0.1rem solid #ededed;
+    border-bottom:0.1rem solid #ededed;
+    /*height: 3rem;*/
+    padding: 1em;
+    text-align: center;
+}
+
+
+/**
+** Helpers
+**/
+.hidden {
+    display: none;
+    height: 0%;
+}

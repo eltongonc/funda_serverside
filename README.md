@@ -1,16 +1,9 @@
 # Funda serverside
 
-Funda serverside is an serverside application that runs on Node.js + Express.
-
--  Server: `express`
--  Average grade B on [gtetrix.com](https://gtmetrix.com/)
--  85/100 on [Google insights](https://developers.google.com/speed/pagespeed/insights)
-
-![Funda](https://raw.githubusercontent.com/eltongonc/funda_serverside/master/screenshots/funda.png)
-
+Funda serverside is an serverside application that runs on Node.js + Express. This project is build to illustrate a few performance patterns to optimize the speed of Funda. Funda serverside is based on the existing [Funda site](www.funda.nl).
 
 ## What does it do
-This project allows users to search houses in the Netherlands.
+Funda serverside allows users to search houses and get information about houses in the Netherlands are registered on Funda.  
 
 ## How to install
 First clone this repo with:
@@ -18,8 +11,7 @@ First clone this repo with:
 $ git clone https://github.com/eltongonc/funda_serverside.git
 ```
 
-
-An API-key is required to run this project. Contact [Funda](funda.nl) for a key. When you have a key place it the `.env` file in this format:
+An API-key is required to run this project. Contact Funda for a key. When you have a key place it the `.env` file in this format:
 ```txt
 KEY=1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwer
 ```
@@ -46,10 +38,19 @@ $ npm start
 $ npm run uglify:js
 $ npm run uglify:css
  ```
-## Performance
 
+
+## Screenshots
+**Full page**
+![Funda](/screenshots/funda-screenshot.png)
+
+**Auto suggest**
+![Auto suggest](/screenshots/autosuggest.png)
+
+## Performance
+In order to compare the performance a few features were build. Here is a overview of those features.
 ### Funda serverside: before
-This is an analysis of Funda homepage version in it's current state for common internet connection:
+This is an analysis of [Funda homepage](www.funda.nl) version in it's current state for common internet connection:
 
 | Connection | DOM Content Loaded | Fully loaded  |
 |------------|:------------------:|:-------------:|
@@ -60,47 +61,41 @@ This is an analysis of Funda homepage version in it's current state for common i
 | Wifi       | 6.48 seconds       | 8.88  seconds |
 
 
-### Overview [Webpagetest](https://www.webpagetest.org)
-**Content loaded**
-
+#### Overview [Webpagetest](https://www.webpagetest.org)
+##### Content loaded
 ![Content](screenshots/before-content.png)
 
-
-**Page load**
-
+##### Page load
 ![Loadspeed](screenshots/before-load.png)
 
-### Overview [PageSpeed insights](https://developers.google.com/speed/pagespeed/insights/?hl=nl)
-**Score**
+#### Overview [PageSpeed insights](https://developers.google.com/speed/pagespeed/insights/?hl=nl)
 
+##### Score - desktop
 ![Google insight score desktop](screenshots/before-google-insight-desktop.png)
+##### Score - mobile
 ![Google insight score mobile](screenshots/before-google-insight-mobile.png)
 
 
 ### Conclusion
-After analyzing [Funda](www.funda.nl) I decided to rebuild the site and see what could be done better
+After analyzing [Funda](www.funda.nl) I noticed that the fully loaded time could be better. Also the mobile version doesn't score high enough.
 
 ## To-do
 - [x] Server Gzip
 - [x] CSS Optimization
 - [x] Image compression
-- [ ] Service worker
-- [ ] HTML compression
-- [ ] Javascript compression
+- [x] Service worker
+- [x] Javascript compression
 - [ ] Screen-reader
 
 
-- [x] Added critical css the load style async above the screen fold.
-- [x] Wrapped images in a picture element. This renders an image depending on the width of the screen
-- [x] Minified and compressed all CSS and JavaScript.
 
-
+### Optimizations
 A series of tests were done with chromes internet connection throttling. These internet speed-tests emulate how people with a slow connection experience a website. The connections exist of GPRS, Good 2G, Good 3G, Regular 4G and Wifi with disabled cache.
 
-## Speed Optimization: Node.js + Express.js
+#### Node.js + Express.js
 This step was mainly rebuilding the homepage of Funda to illustrate how the webapp could be optimised with a Node.js server. Serving html files from the server can boost the overall speed, but because this is a rebuild it wouldn't be fair to compare it to the previous table.
 
-### Speed Optimization results
+##### Results
 
 | connection | DOM Content Loaded | Fully loaded  |
 |------------|:------------------:|:-------------:|
@@ -110,16 +105,15 @@ This step was mainly rebuilding the homepage of Funda to illustrate how the weba
 | Regular 4G | 6.05 seconds       | 9.89  seconds |
 | Wifi       | 6.48 seconds       | 8.88  seconds |
 
-**GZIP**
+#### GZIP
 ```js
 // compression
-app.use(compression({threshhold: 0, filter: shouldCompress}));
-function shouldCompress(req, res) {
-  if (req.headers['x-no-compression']) {return false;/* don't compress responses with this request header*/}
-  // fallback to standard filter function
-  return compression.filter(req, res);
-}
+app.use(compression({
+  threshhold: 0,
+  filter:  true
+}));
 ```
+##### Results
 | connection | DOM Content Loaded | Fully loaded  |
 |------------|:------------------:|:-------------:|
 | GPRS       | 25.44 seconds      | 7.7 minutes   |
@@ -129,14 +123,14 @@ function shouldCompress(req, res) {
 | Wifi       | 1.75 seconds       | 3.08  seconds |
 
 
-## CSS Optimization
+#### CSS Optimization
 To increase the overall speed I generated some critical-css. The criticalCSS is the style that the site needs above the page fold.
 To view these changes change branch with `$ git checkout ft-css-optimization` and run `$ npm run criticalCSS` this will generate a bundled criticalCSS in the `public` folder
 
-### CriticalCSS generator: Penthouse
+##### Penthouse module
 The `criticalCSS-generator.js` file loops through all files in the `/public/css/` folder and checks for css that can be applied on the viewport with the `penthouse node module`.
 
-**criticalCSS-generator.js**
+##### criticalCSS-generator.js
 ```js
 var penthouse = require("penthouse")
 ,   fs = require('fs');
@@ -147,7 +141,7 @@ penthouse(config, function(err, criticalCss) {
 });
 ```
 
-### CriticalCSS loader: loadCSS
+##### CriticalCSS loader: loadCSS
 To use the criticalCSS I used a module called loadCSS. This functions makes sure the CSS loads after the page is done rendering the HTML content.
 ```HTML
     <style>
@@ -156,7 +150,7 @@ To use the criticalCSS I used a module called loadCSS. This functions makes sure
 
     <!-- Async CSS -->
     <script>
-        loadCSS("/css/style.css")
+        loadCSS("/path/to/style.css")
     </script>
 
     <!-- Fallback if the browser does not support Javascript -->
@@ -165,7 +159,7 @@ To use the criticalCSS I used a module called loadCSS. This functions makes sure
     </noscript>
 ```
 
-### CSS Optimization results
+##### Results
 
 | connection | DOM Content Loaded | Fully loaded  |
 |------------|:------------------:|:-------------:|
@@ -176,7 +170,7 @@ To use the criticalCSS I used a module called loadCSS. This functions makes sure
 | Wifi       | 2.17 seconds      | 4.0   seconds |
 
 
-## Images Optimization
+#### Images Optimization
 As stated before the images are one of the reasons why the webapp is slow.
 The images are replace with a compressed version. No difference is visible.
 To view these changes change branch with `$ git checkout ft-img-optimization`.
@@ -195,7 +189,7 @@ To view these changes change branch with `$ git checkout ft-img-optimization`.
 ## Javascript Optimization
 Added a defer attribute on the script tags to load when the content is done loading  `$ git checkout ft-js-optimization`.
 
-### JS Optimization results
+### Results
 
 | connection | DOM Content Loaded | Fully loaded  |
 |------------|:------------------:|:-------------:|
@@ -207,18 +201,16 @@ Added a defer attribute on the script tags to load when the content is done load
 
 
 
-## Part-up: After
-After applying all the changes made the webapp was much faster.
-To view the results change branch with `$ git checkout ft-performance`.
-Here are the results:
+## Funda serverside: After
+Here are the results of the changes made to Funda serverside:
 
 | connection | DOM Content Loaded | Fully loaded  |
 |------------|:------------------:|:-------------:|
-| GPRS       | 16.70 seconds      | 6 minutes     |
-| Good 2G    | 2.44 seconds       | 40.92 seconds |
-| Good 3G    | 2.09 seconds       | 12.85 seconds |
-| Regular 4G | 1.56 seconds       | 5.52 seconds  |
-| Wifi       | 1.55 seconds       | 3.52 seconds |
+| GPRS       | 3.02 seconds       | 56.88 seconds |
+| Good 2G    | 1.97 seconds       | 7.97 seconds  |
+| Good 3G    | 1.60 seconds       | 4.26 seconds  |
+| Regular 4G | 1.92 seconds       | 3.89 seconds  |
+| Wifi       | 2.20 seconds       | 4.01 seconds  |
 
 ### Overview [Webpagetest](https://www.webpagetest.org)
 **Score**
@@ -242,33 +234,23 @@ Here are the results:
 
 
 ### Conclusion
-The site is much faster after applying the changes. Rendering the files on the server will give it a boost in performance. Optimizing the images, js- and css-files will also help increasing the speed.
-
-
+The site is much faster after applying the changes. Rendering the files on the server will give it a boost in performance. Loading the page async helps the DOM content te be loaded much faster.
 
 ## Improving the app
-
 Because this was a three week project there is still a lot that can to be implemented. Below is a list of features already in the app and a wishlist of features.
 
 ### Features
-
 - Get a list of houses based on a search query.
 - View and get information about a house.
-- Ja
+- Lazy loading
 
 
 ### Wishlist
-This project is still in development. I'm currently working on a wizzard on the wizzard branch
-- Search wizzard
-- Works offline
+- Search wizzard(in progress)
 - Check if userquery already exist. No extra API calls if the search is already present.
 - Pretty urls
 - Lazy loading
-
-## To-do
-- [ ] Receive an 100/100 score on [Google insights](https://developers.google.com/speed/pagespeed/insights)
-- [ ] Cache files to improve the speed
-- [ ] Add a server worker for hybrid functionalities
+- Use the server worker for hybrid functionalities
 
 
 ## How to contribute
@@ -276,7 +258,7 @@ You can help improve this project by sharing your expertise and tips, as well as
 
 
 ## Example
-Because this project requires a key I shall not make it live
+Because this project requires a key I shall not make it live.
 
 
 ### Built With

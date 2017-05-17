@@ -8,10 +8,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var template  = require('express-handlebars');
-var routes = require("./routes/paths.js");
 var compression = require('compression');
 var async = require('async');
 
+var routes = require("./routes/paths.js");
 
 var app = express();
 
@@ -51,7 +51,8 @@ app.use(parallel([
 ]));
 
 
-// app.use(favicon(__dirname + '/public/img/favicon.ico'));
+app.use(favicon(__dirname + '/public/img/favicon.ico'));
+
 
 // Create all routes
 for (var x in routes) {
@@ -66,26 +67,13 @@ app.use(function(req, res, next) {
     next(err);
 });
 
-/// error handlers
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err,
-            title: 'error'
-        });
-    });
-}
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
-        message: err.message,
+        message: "This page does not exist",
         error: {},
         title: 'error'
     });
