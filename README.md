@@ -97,7 +97,7 @@ After analyzing [Funda](www.funda.nl) I noticed that the fully loaded time could
 A series of tests were done with chromes internet connection throttling. These internet speed-tests emulate how people with a slow connection experience a website. The connections exist of GPRS, Good 2G, Good 3G, Regular 4G and Wifi with disabled cache.
 
 #### Node.js + Express.js
-This step was mainly rebuilding the homepage of Funda to illustrate how the webapp could be optimised with a Node.js server. Serving html files from the server can boost the overall speed, but because this is a rebuild it wouldn't be fair to compare it to the previous table. The next table will
+This step was mainly rebuilding the homepage of Funda to illustrate how the webapp could be optimised with a Node.js server. Serving html files from the server can boost the overall speed, but because this is a rebuild it wouldn't be fair to compare it to the previous table. The next table is a test of the assests I could acquire.
 
 ##### Results
 
@@ -110,7 +110,7 @@ This step was mainly rebuilding the homepage of Funda to illustrate how the weba
 | Wifi       | 6.48 seconds       | 8.88  seconds |
 
 #### GZIP
-To GZIP the files I used a module called compression.
+To GZIP the files I used a module called compression. This goes through all static files and compresses them.
 ```js
 // compression
 app.use(compression({
@@ -123,7 +123,7 @@ app.use(compression({
 To increase the overall speed I generated some critical-css. The criticalCSS is the style that the site needs above the page fold.
 
 ##### Penthouse module
-The `criticalCSS-generator.js` file loops through all files in the `/public/css/` folder and checks for css that can be applied on the viewport with the `penthouse node module`. It then continues to generate a criticalCSS file.
+The `criticalCSS-generator.js` file loops through all files in the `/public/css/` folder and checks for css that can be applied to the viewport with the `penthouse node module`. It then continues to generate a criticalCSS file.
 
 ##### criticalCSS-generator.js
 ```js
@@ -156,7 +156,7 @@ To use the criticalCSS I used a module called loadCSS. This functions makes sure
 
 
 #### Images Optimization
-I did not find a way to optimize the images, because images are stored on a externa; server.
+I did not find a way to optimize the images, because images are stored on a external server.
 
 
 #### Javascript Optimization
