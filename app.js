@@ -8,10 +8,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var template  = require('express-handlebars');
-var routes = require("./routes/paths.js");
 var compression = require('compression');
 var async = require('async');
 
+var routes = require("./routes/paths.js");
 
 var app = express();
 
@@ -52,7 +52,6 @@ app.use(parallel([
 
 
 app.use(favicon(__dirname + '/public/img/favicon.ico'));
-
 
 
 // Create all routes
